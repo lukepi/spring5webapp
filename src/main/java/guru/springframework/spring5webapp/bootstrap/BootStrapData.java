@@ -27,43 +27,46 @@ public class BootStrapData implements CommandLineRunner {
         System.out.println("Started in Bootstrap");
 
 //        Publisher
-        Publisher puf = new Publisher();
-        puf.setName("Puffin");
-        puf.setAddressLine1("Puffin House");
-        puf.setCity("Chicago");
-        puf.setState("Illinois");
-        publisherRepository.save(puf);
+        Publisher publisher = new Publisher();
+        publisher.setName("Puffin");
+        publisher.setAddressLine1("Puffin House");
+        publisher.setCity("Chicago");
+        publisher.setState("Illinois");
+        publisherRepository.save(publisher);
 
-//        Books
-        Author eric = new Author("Eric", "Evans");
-        Book ddd = new Book("Domain Driven Design", "123123");
-        eric.getBooks().add(ddd);
-        ddd.getAuthors().add(eric);
+//        Book1
+        Book book1 = new Book("Domain Driven Design", "123123");
+        Author auth1 = new Author("Eric", "Evans");
 
-        ddd.setPublisher(puf);
-        puf.getBooks().add(ddd);
+        book1.getAuthors().add(auth1);
+        auth1.getBooks().add(book1);
 
-        authorRepository.save(eric);
-        bookRepository.save(ddd);
-        publisherRepository.save(puf);
+        book1.setPublisher(publisher);
+        publisher.getBooks().add(book1);
 
-        Author rod = new Author("Rod", "Johnson");
-        Book noEJB = new Book("J2EE Development without EJB", "3939459459");
-        rod.getBooks().add(noEJB);
-        noEJB.getAuthors().add(rod);
+        authorRepository.save(auth1);
+        bookRepository.save(book1);
+        publisherRepository.save(publisher);
 
-        noEJB.setPublisher(puf);
-        puf.getBooks().add(noEJB);
+//        Book2
+        Book book2 = new Book("J2EE Development without EJB", "3939459459");
+        Author auth2 = new Author("Rod", "Johnson");
 
-        authorRepository.save(rod);
-        bookRepository.save(noEJB);
-        publisherRepository.save(puf);
+        book2.getAuthors().add(auth2);
+        auth2.getBooks().add(book2);
+
+        book2.setPublisher(publisher);
+        publisher.getBooks().add(book2);
+
+        authorRepository.save(auth2);
+        bookRepository.save(book2);
+        publisherRepository.save(publisher);
 
 
         System.out.println("Number of Books: "+ bookRepository.count());
         System.out.println("Number of Authors: "+ authorRepository.count());
         System.out.println("Number of Publishers: "+ publisherRepository.count());
-        System.out.println("Number of Books in Publisher" + puf.getBooks().size());
+        System.out.println("Number of Books in Publisher: " + publisher.getBooks().size());
 
 
     }
